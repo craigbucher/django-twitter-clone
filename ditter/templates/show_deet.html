@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+<!-- 'load static' because using image(s) from static folder -->
+{% load static %}
+{% block content %}
+
+<div class="container text-center">
+	<div class="row">
+		<div class="col-8">
+			<br/>
+			<div class="alert alert-dark" role="alert">
+				<div class="container">
+					<div class="row">
+						<div class="col-1">
+
+							{% if deet.user.profile.profile_image %}
+								<img src="{{ deet.user.profile.profile_image.url }}" width=50 height=50 class="rounded-circle" alt="{{ profile.user.username }}">
+							{% else %}
+								<img src="{% static 'images/default_profile_pic.png' %}" width=50 height=50 class="rounded-circle" alt="{{ profile.user.username }}">	
+							{% endif %}
+
+						</div>
+
+						<div class="col-11">
+							{{ deet.body }}<br/>
+							<small class="text-muted">
+							({{ deet.created_at}}) By 
+							<a href="{% url 'profile' deet.user.id %}">@{{ deet.user.username }}</a>
+							- {{ deet.number_of_likes }} Likes
+
+							{% if user.is_authenticated %}
+								{% if user in deet.likes.all %}
+									<a href="{% url 'deet_like' deet.id %}" title="Unlike" style="text-decoration:none"> - 
+									<i class="fa-solid fa-heart" style="color:red"></i>
+									</a>
+								{% else %}
+									<a href="{% url 'deet_like' deet.id %}" title="Like" style="text-decoration:none"> - 
+									<i class="fa fa-heart-o" style="color:red"></i>
+									</a>
+								{% endif %}
+							{% endif %}
+
+							</small>
+						</div>
+						<br/><br/>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-4">
+			<br/><br/><br/>
+
+			{% if form %}
+
+				<form  method=POST>
+					{% csrf_token %}
+					{{ form.as_p }}
+					<button type="submit" class="btn btn-secondary">Post Deet!</button>
+				</form>
+			
+			{% endif %}
+
+		</div>
+	</div>
+</div>
+
+{% endblock %}

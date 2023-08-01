@@ -1,0 +1,23 @@
+✓ don't require re-entry of password to update user, unless want to change password
+✓ display current photo on update user page (as well as file name)
+✓ display firstName + lastName rather than username
+✓ only show 'See All' on own page
+✓ make it so you can't force people to unfollow you
+- notification if deet has been edited
+✓ update create/modified time on deet when edited
+- search on multiple terms (loop through terms?)
+✓ click on deet search result username to go to profile
+- click on deet search result to deet page
+✓ remove like/dislike heart from homepage when not logged in
+- profile update doesn't enforce entries for social media
+- when logged-in, allow updating & deleting deets from home page
+- make search case-agnostic (upper or lower)
+- username link to profile page on home page tweets
+- ** attach photos to deets **
+
+https://www.makeuseof.com/django-app-vercel-host-free/
+https://codinggear.blog/django-environment-variables/
+https://devmaesters.com/blog/15 <== static files in vercel *****
+
+django-twitter-clone.vercel.app
+django-twitter-clone-git-main-craigbucher-hotmailcom.vercel.app

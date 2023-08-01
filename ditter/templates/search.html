@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+<!-- 'load static' because using image(s) from static folder -->
+{% load static %}
+{% block content %}
+
+<h1>Search Deets!</h1>
+<br/>
+
+<form  method=POST>
+	{% csrf_token %}
+	<input type="input" class="form-control"  placeholder="Search term" name="search">
+	<br/><br/>
+	<button type="submit" class="btn btn-secondary">Search Deets!</button>
+</form>
+<br/><br/>
+
+{% if search %}
+	<h3>You Searched For: '{{ search }}'</h3>
+	<br/>
+
+	{% for deet in searched %}
+	<!-- deets are actually bootstrap alerts/messages: -->
+	<!-- "alert-dark" = grey background -->
+		<div class="alert alert-dark" role="alert">
+			<div class="container">
+				<div class="row">
+					<!-- class="col-1" = 1/12 page width -->
+					<div class="col-1">
+
+						{% if deet.user.profile.profile_image %}
+							<img src="{{ deet.user.profile.profile_image.url }}" width=50 height=50 class="rounded-circle" alt="{{ profile.user.username }}">
+						{% else %}
+							<img src="{% static 'images/default_profile_pic.png' %}" width=50 height=50 class="rounded-circle" alt="{{ profile.user.username }}">	
+						{% endif %}
+		
+					</div>
+
+					<!-- class="col-11" = 11/12 page width -->
+					<div class="col-11">
+						{{ deet.body }}<br/>
+						<small class="text-muted">
+						({{ deet.created_at}}) By 
+						<a href="{% url 'profile' deet.user.id %}">@{{ deet.user.username }}</a> 
+						&nbsp;&nbsp;
+						{{ deet.number_of_likes }} Likes 
+
+						<!-- only allow liking/unliking when logged-in -->
+						{% if user.is_authenticated %}
+							{% if user in deet.likes.all %}
+								<a href="{% url 'deet_like' deet.id %}" title="Unlike">
+								<i class="fa-solid fa-heart" style="color:red"></i></a>
+							{% else %}
+								<a href="{% url 'deet_like' deet.id %}" title="Like">
+								<i class="fa fa-heart-o" style="color:red"></i></a>
+							{% endif %}
+						{% endif %}
+
+						<!-- &nbsp = create a space that will not break into a new line by word wrap -->
+						&nbsp;&nbsp;
+						<a href="{% url 'deet_show' deet.id %}">
+						<i class="fa-solid fa-share" style="color:gray"></i>
+						</a>
+						</small>
+					</div>
+					<br/><br/>
+				</div>
+			</div>
+		</div>
+		<br/>
+	{% endfor %}
+{% endif %}
+{% endblock %}

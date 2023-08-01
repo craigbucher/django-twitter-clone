@@ -1,0 +1,95 @@
+<!-- 'load static' because using image(s) from static folder -->
+{% load static %}
+
+<div class="modal fade" id="basicModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header pt-2 pb-2">
+            <h5 class="modal-title" id="myModalLabel">About this site:</h5>
+            <button type="button" class="btn-close btn-sm" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <h7>All coding by Craig Bucher, craig @ craigbucher . com,</h7><br>
+              <h7>based on site design in tutorial by John Elder of <a href="https://www.youtube.com/watch?v=KXunlJgeRcU" target="new">codemy.com</a>.</h7><br>
+              <h7>My code: <a href="https://github.com/craigbucher/django-twitter-clone" target="new">GitHub</a></h7>
+          </div>
+      </div>
+  </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <!-- <a class="navbar-brand" href="{% url 'home' %}">Ditter</a> -->
+    <!-- <div> -->
+    <a class="navbar-brand" href="{% url 'home' %}">
+      <img src="{% static 'images/D-cropped.jpg' %}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+      Ditter
+      <div><p style="color:darkgrey;font-size:11px;margin-bottom: -5px;padding-top: 5px;">(coded by Craig Bucher)</p></div>
+    </a>
+    <!-- </div> -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Search
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'search' %}">Search Deets</a></li>
+            <li><a class="dropdown-item" href="{% url 'search_user' %}">Search Users</a></li>
+            </ul>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" 
+          href="{% url 'profile_list' %}">Profile List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" 
+          href="{% url 'profile' user.id %}">My Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" 
+          href="{% url 'logout' %}">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" 
+          href="{% url 'register' %}">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" 
+          href="{% url 'login' %}">Login</a>
+        </li>
+        {% endif %}
+
+        
+      </ul>
+
+      <!-- Add profile photo at right of Navbar -->
+      {% if user.is_authenticated %}
+      <!-- ml-auto = push to the right -->
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link ml-auto mt-2"
+            href="#basicModal" data-bs-toggle = "modal" data-target= "##basicModal">About This Site</a>
+          </li>
+          <li class="nav-link navbar-brand float-end">
+            <a href="{% url 'profile' request.user.id %}">
+            {% if user.profile.profile_image %}
+              <img src="{{ user.profile.profile_image.url }}" class="rounded-circle float-end" alt="Profile Image" width=30>
+            {% else %}
+              <img src="{% static 'images/default_profile_pic.png' %}" class="img-fluid rounded-circle" alt="Profile Image" width=30>
+            {% endif %}
+            <!-- class="float-end" = push to right of container -->
+            <div><p class="float-end" style="color:darkgrey;font-size:11px;margin-bottom: -5px;padding-top: 5px;">{{ user.username }}</p></div>
+            </a>
+          </li>
+        </ul>
+      {% endif %}
+
+    </div>
+  </div>
+</nav>
