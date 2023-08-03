@@ -3,6 +3,10 @@
 {% load static %}
 {% block content %}
 
+created: {{ deet.created_at }}<br/>
+updated: {{ deet.modified_at }}
+
+
 <div class="container text-center">
 	<div class="row">
 		<div class="col-8">
@@ -21,7 +25,11 @@
 						</div>
 
 						<div class="col-11">
-							{{ deet.body }}<br/>
+							{{ deet.body }}&nbsp
+							<!-- check if has been edited since creation -->
+							{% if deet.created_at|timesince != deet.modified_at|timesince %}
+								(edited)
+							{% endif %}<br/>
 							<small class="text-muted">
 							({{ deet.created_at}}) By 
 							<a href="{% url 'profile' deet.user.id %}">@{{ deet.user.username }}</a>

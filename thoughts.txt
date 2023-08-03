@@ -3,17 +3,18 @@
 ✓ display firstName + lastName rather than username
 ✓ only show 'See All' on own page
 ✓ make it so you can't force people to unfollow you
-- notification if deet has been edited
+✓ notification if deet has been edited
 ✓ update create/modified time on deet when edited
 - search on multiple terms (loop through terms?)
 ✓ click on deet search result username to go to profile
-- click on deet search result to deet page
+- click on deet search (whole card) result to deet page
 ✓ remove like/dislike heart from homepage when not logged in
-- profile update doesn't enforce entries for social media
+✓ profile update doesn't enforce entries for social media
 - when logged-in, allow updating & deleting deets from home page
-- make search case-agnostic (upper or lower)
-- username link to profile page on home page tweets
+✓ make search case-insensitive (icontains vs contains)
+✓ username link (and photo?) to profile page on home page tweets
 - ** attach photos to deets **
+- make deet form a separate component {include}
 
 https://www.makeuseof.com/django-app-vercel-host-free/
 https://codinggear.blog/django-environment-variables/

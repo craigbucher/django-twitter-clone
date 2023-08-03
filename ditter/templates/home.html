@@ -18,16 +18,24 @@
               <div class="col-1">
                 <!-- deet.user ==> (foreign key in Profile model) ==> profile.profile_image.url -->
                 {% if deet.user.profile.profile_image %}
-                  <img src="{{ deet.user.profile.profile_image.url }}" width=50 height=50 class="rounded-circle" alt="{{ profile.user.username }}">
+                  <a href="{% url 'profile' deet.user.id %}">
+                    <img src="{{ deet.user.profile.profile_image.url }}" width=50 height=50 class="rounded-circle" alt="{{ profile.user.username }}">
+                  </a>
                 {% else %}
-                  <img src="{% static 'images/default_profile_pic.png' %}" width=50 height=50 class="rounded-circle" alt="{{ profile.user.username }}">	
+                  <a href="{% url 'profile' deet.user.id %}">
+                    <img src="{% static 'images/default_profile_pic.png' %}" width=50 height=50 class="rounded-circle" alt="{{ profile.user.username }}">	
+                  </a>
                 {% endif %}
               </div>
               <div class="col-11">
-                {{deet.body}}<br>
+                {{deet.body}}&nbsp
+                <!-- check if has been edited since creation -->
+                {% if deet.created_at|timesince != deet.modified_at|timesince %}
+                  (edited)
+                {% endif %}<br/>
                 <small class="text-muted">
                 {{ deet.created_at }} by 
-                @{{ deet.user.username }}
+                <a href="{% url 'profile' deet.user.id %}">@{{ deet.user.username }}</a>
                 - {{ deet.number_of_likes }} Likes
 
                 <!-- only allow liking/unliking when logged-in -->

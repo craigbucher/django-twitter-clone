@@ -64,11 +64,11 @@ class DeetForm(forms.ModelForm):
 # Profile Extras Form
 class ProfilePicForm(forms.ModelForm):
 	profile_image = forms.ImageField(label="Profile Picture")
-	profile_bio = forms.CharField(label="Profile Bio", widget=forms.Textarea(attrs={'class':'form-control', 'placeholder':'Profile Bio'}))
-	homepage_link = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Website Link'}))
-	facebook_link =  forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Facebook Link'}))
-	instagram_link = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Instagram Link'}))
-	linkedin_link =  forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'LinkedIn Link'}))
+	profile_bio = forms.CharField(required=False, label="Profile Bio", widget=forms.Textarea(attrs={'class':'form-control', 'placeholder':'Profile Bio'}))
+	homepage_link = forms.CharField(required=False, label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Website Link'}))
+	facebook_link =  forms.CharField(required=False, label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Facebook Link'}))
+	instagram_link = forms.CharField(required=False, label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Instagram Link'}))
+	linkedin_link =  forms.CharField(required=False, label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'LinkedIn Link'}))
 	
 	class Meta:
 		model = Profile	# save to 'Profile' model, **not** the 'User' model

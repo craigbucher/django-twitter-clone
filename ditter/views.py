@@ -260,7 +260,7 @@ def search(request):
 		# Grab the form field input
 		search = request.POST['search']	# = 'name="search"' in <input> tag
 		# Search the database
-		searched = Deet.objects.filter(body__contains = search)
+		searched = Deet.objects.filter(body__icontains = search)	# icontains = case insensitive
 		return render(request, 'search.html', {'search':search, 'searched':searched})
 	else:
 		return render(request, 'search.html', {})
@@ -270,7 +270,7 @@ def search_user(request):
 		# Grab the form field input
 		search = request.POST['search']	# = 'name="search"' in <input> tag
 		# Search the database
-		searched = User.objects.filter(username__contains = search)
+		searched = User.objects.filter(username__icontains = search)	# icontains = case insensitive
 		return render(request, 'search_user.html', {'search':search, 'searched':searched})
 	else:
 		return render(request, 'search_user.html', {})

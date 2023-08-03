@@ -33,7 +33,11 @@
 									<div class="col-11">
 										{{ deet.created_at }}
 										{{ deet.modified_at }}
-										{{ deet.body }}<br/>
+										{{ deet.body }}&nbsp
+										<!-- check if has been edited since creation -->
+										{% if deet.created_at|timesince != deet.modified_at|timesince %}
+											(edited)
+										{% endif %}<br/>
 										<small class="text-muted">
 										(created {{ deet.created_at }}) By
 										@{{ deet.user.username }}
@@ -83,28 +87,28 @@
 
 				{% if profile.homepage_link %}
 				<!-- target="new" = open in new browser page -->
-					<a href="{{ profile.homepage_link }}" target="new">
+					<a href="http://{{ profile.homepage_link }}" target="new">
 					<!-- class="fa-solid fa-link" = FontAwesome 'link' icon -->
 					<i class="fa-solid fa-link" style="color:gray"></i></a>
 				{% endif %}
 				&nbsp;&nbsp;
 
 				{% if profile.facebook_link %}
-					<a href="{{ profile.facebook_link }}" target="new">
+					<a href="http://{{ profile.facebook_link }}" target="new">
 					<!-- class="fa-brands fa-facebook-f" = FontAwesome Facebook icon -->
 					<i class="fa-brands fa-facebook-f" style="color:gray"></i></a>
 				{% endif %}
 				&nbsp;&nbsp;
 
 				{% if profile.instagram_link %}
-					<a href="{{ profile.instagram_link }}" target="new">
+					<a href="http://{{ profile.instagram_link }}" target="new">
 					<!-- class="fa-brands fa-instagram" = FontAwesome Instagram icon -->
 					<i class="fa-brands fa-instagram" style="color:gray"></i></a>
 				{% endif %}
 				&nbsp;&nbsp;
 
 				{% if profile.linkedin_link %}
-					<a href="{{ profile.linkedin_link }}" target="new">
+					<a href="http://{{ profile.linkedin_link }}" target="new">
 					<!-- class="fa-brands fa-linkedin-in" = FontAwesome LinkedIn icon -->
 					<i class="fa-brands fa-linkedin-in" style="color:gray"></i></a>
 				{% endif %}
